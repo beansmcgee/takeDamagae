@@ -1,0 +1,201 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package character3;
+import java.util.Scanner;
+
+/**
+ *
+ * @author bradkaufman24
+ */
+public class Character3 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Character3 character1 = new Character3("Gary", 100, 100, true);
+        Character3 character2 = new Character3("Steve", 100, 100, true);
+        character1.shot();
+        System.out.println(character1.toString());
+        System.out.println(character2.toString());
+        System.out.println("How much more damage would you like to inflict?");
+        int damage = scanner.nextInt();
+        character1.shot(damage);
+        System.out.println(character1.toString());
+        System.out.println(character2.toString());
+    } 
+    
+    
+
+    /**
+     * Character.java
+     *
+     * Creates a Character to be used in a "Game". The Character will have a
+     * name, life points, weapon with damage and an alive status.
+     *
+     * This class will be used as the Base for Lab 5.
+     *
+     * Place the answers to the Questions here: 1. Internal method calls are
+     * done by
+     * <object>.methodName? 2. The this keyword is mandatory in constructors?
+     *
+     *
+     * @author smv159, BradKaufman
+     * @version 10/14/19
+     */
+    private String name;
+    private int lifePoints;
+    private int weaponDamage;
+    private boolean alive;
+
+    /**
+     * Create a new Character3 object
+     *
+     * @param characterName - Name of the Character3
+     */
+    public Character3(String characterName) {
+        //#1 - Modify the parameter to be the same name
+        this.name = characterName;
+        lifePoints = 100;
+        weaponDamage = 100;
+        alive = true;
+    }
+
+    //#2 - Create another constructor
+    public Character3(String characterName, int lifePoints, int weaponDamage,
+            boolean alive) {
+        this.name = characterName;
+        this.lifePoints = 100;
+        this.weaponDamage = 100;
+        this.alive = true;
+    }
+
+    //#3 - Create a method called shot
+    public void shot() {
+        if (lifePoints >= 0) {
+            lifePoints = lifePoints - 5;
+        } 
+        if (lifePoints<= 0) {
+            this.alive = false;
+//            System.out.println("LOL" + name + "is dead!");
+        }
+    }
+
+    //#4 - Create another method called shot (method overloading)
+    public void shot(int damage) {
+        if (lifePoints >= 0) {
+            lifePoints -= damage;
+            this.alive = true;
+        } 
+        if (lifePoints<= 0) {
+            this.alive = false;
+        }
+    }
+
+    //**********GET Methods************
+    /**
+     * @return Name of the Character3
+     */
+    public String getName() {
+        return name;
+
+    }
+
+    /**
+     * @return Current life points of the Character3
+     */
+    public int getlifePoints() {
+        return lifePoints;
+    }
+
+    /**
+     * @return Damage that the Character3's weapon produces
+     */
+    public int getweaponDamage() {
+        return weaponDamage;
+    }
+
+    /**
+     * @return Whether the Character3 is alive or not
+     */
+    public boolean isAlive() {
+        //#5 - Modify to check the Character3's life points
+        if(lifePoints >= 0) {
+            this.alive = true;
+        } else if(lifePoints <= 0) {
+            this.alive = false;
+            System.out.println("LOL" + name + "is dead!");
+            
+    }
+       
+        
+    }
+    //**********SET Methods************
+    /**
+     * Set the Character3's name
+     *
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Set the LifePoints to a specific value
+     *
+     * @param points
+     */
+    public void setLifePoints(int points) {
+        if (points >= 1 && points <= 100) {
+            this.lifePoints = points;
+        } else {
+            System.out.println("Error: points must be in range [1 - 100]");
+        }
+    }
+
+    /**
+     * Set the weapon's damage value
+     *
+     * @param damage
+     */
+    public void setWeaponDamage(int damage) {
+        this.weaponDamage = damage;
+    }
+    
+
+    /**
+     * Returns the current state of the Character3
+     */
+    @Override
+    public String toString() {
+        return "Character [name= " + name
+                + ", Life Points= " + lifePoints
+                + ", Weapon Damage= " + weaponDamage
+                + ", Character is " + (alive ? "alive." : "dead.") + "]";
+    }
+}
+
+class Game {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Character3 character1 = new Character3("Gary", 100, 100, true);
+        Character3 character2 = new Character3("Steve", 100, 100, true);
+        character1.shot();
+        
+        System.out.println("How many?");
+        int damage = scanner.nextInt();
+       
+        character1.shot();
+        System.out.println(character1.toString());
+        System.out.println(character2.toString());
+        
+      
+    }
+    
+  
+}
